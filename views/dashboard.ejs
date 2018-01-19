@@ -1,0 +1,36 @@
+<% include headerAdmin.ejs %>
+
+<div class="dashboardheader">
+   	<h1>Table of Pages</h1>
+</div>
+	
+<div class="btnaddpage">
+	<a href="/admin/addpage"><input type="button" value="Add Page"></a>
+</div>
+
+
+<div class = "table">
+	<table id = main>
+	<tr>
+		<th>title</th>
+		<th>updated</th>
+		<th>options</th>
+	</tr>
+	<% for(var i=0; i<4; i++) {%>
+
+	<tr>
+		<td><a href = <%= url%> ><%= pgname %></a></td>
+		<td><%= date %></td>
+		<td>
+		<table id = tblmain>
+     		<td id = tblmain><img src="/images/delete.png" alt="delete" width="20" height="20"></td>
+     		<td id = tblmain><img src="/images/edit.png" alt="edit" width="20" height="20"></td>
+     		<td id = tblmain><img src="/images/visibility.png" alt="visibility" width="20" height="20"></td>
+		</table>
+		</td>
+	</tr>
+	<%}%>
+	</table>
+</div>
+
+<% include footer.ejs %>

@@ -1,0 +1,108 @@
+.nav{
+  position:fixed;
+  top : 0;
+  right : 0;
+  left :0;
+  background:black;
+  padding:16px;
+}
+
+.nav a{
+  color:white;
+  padding: 16px;
+  text-decoration: none;
+}
+
+.nav a:hover {
+  background-color: #555;
+}
+
+
+.header{
+  position:static;
+  margin-top: 64px;
+}
+
+
+
+.footer{
+  position:fixed;
+  bottom: 2px;
+}
+
+.footer a{
+  color:black;
+  text-decoration:none;
+}
+
+.footer a:hover{
+  color:#999;
+}
+
+body{
+  background-color:#eee;
+}
+
+
+
+table#main, th,td{
+  border: 1px solid black;
+}
+
+
+td#tblmain{
+  text-align:center;
+  border:none;
+  padding-bottom:2px;
+  padding-top:2px;
+}
+
+td#tblmain:hover{
+  background-color:#ccc;
+}
+
+table {
+  width: 100%;
+}
+
+.dashboardheader{
+width : 75%;
+text-align:center;
+display:inline-block;
+
+ }
+
+.btnaddpage{
+  width : 15%;
+  display:inline-block;
+}
+
+
+
+.login{
+  position:fixed;
+  bottom: 65%;
+  right: 50%;
+}
+
+.registration{
+  position:fixed;
+  bottom: 35%;
+  right: 50%;
+}
+	 
+.edit{
+  position:fixed;
+  bottom: 50%;
+  right: 50%;
+}
+
+#title, #url, #content
+{
+width: 98%;
+}
+
+#content{
+height: 250px;
+}
+   
