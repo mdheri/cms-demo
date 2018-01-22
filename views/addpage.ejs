@@ -1,10 +1,10 @@
 <% include headerAdmin.ejs %>
 
-<form>
+<form method="post" action = "/admin/addpage/save">
 	<input type="text" placeholder="title" id="title" name = "title"><br>
 	<textarea placeholder="content" id="content" name = "content"></textarea><br>
 	<input type="text" placeholder="please enter a url" id="url" name = "url"><br>
-	<a href="/admin/addpage/save"> <input type="button" value = "Save" name = "save" id = "save"></a>
+    <input type="submit" value="Save" name = btnSave id = save>
 
 </form>
 

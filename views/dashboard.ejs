@@ -16,16 +16,16 @@
 		<th>updated</th>
 		<th>options</th>
 	</tr>
-	<% for(var i=0; i<4; i++) {%>
+	<% for(var i=0; i<Object.keys(page).length; i++) {%>
 
 	<tr>
-		<td><a href = <%= url%> ><%= pgname %></a></td>
-		<td><%= date %></td>
+		<td><a href = "<%= page[i].url%>" ><%= page[i].title %></a></td>
+		<td><%= page[i].date %></td>
 		<td>
 		<table id = tblmain>
-     		<td id = tblmain><img src="/images/delete.png" alt="delete" width="20" height="20"></td>
-     		<td id = tblmain><img src="/images/edit.png" alt="edit" width="20" height="20"></td>
-     		<td id = tblmain><img src="/images/visibility.png" alt="visibility" width="20" height="20"></td>
+     		<td id = tblmain><a href = "/admin/delete"><img src="/images/delete.png" alt="delete" width="20" height="20"></a></td>
+     		<td id = tblmain><a href = "/admin/editpage"><img src="/images/edit.png" alt="edit" width="20" height="20"></td></a>
+     		<td id = tblmain><a href = "/admin/visability"><img src="/images/visibility.png" alt="visibility" width="20" height="20"></td></a>
 		</table>
 		</td>
 	</tr>
