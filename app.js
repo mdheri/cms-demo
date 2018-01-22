@@ -5,12 +5,12 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+var session = require('client-sessions');
+var User = require('./models/user');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
 var admin = require('./routes/admin');
-
-
 
 var app = express();
 
@@ -35,9 +35,35 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
+app.use(session({
+  cookieName: 'session',
+  secret: 'eg[isfd-8yF9-7w23akmfaw245to8',
+  duration: 30 * 60 * 1000,
+  activeDuration: 5 * 60 * 1000,
+  httpOnly: true,
+  secure: true,
+  ephemeral: true
+}));
+
+app.use(function(req, res, next) {
+  if (req.session && req.session.user) {
+    User.findOne({ email: req.session.user.email }, function(err, user) {
+      if (user) {
+        req.user = user;
+        delete req.user.password; 
+        req.session.user = user;  
+        res.locals.user = user;
+      }
+      next();
+    });
+  } else {
+    next();
+  }
+});
+
 app.use('/users', users);
 app.use('/admin', admin);
+app.use('/', index);
 
 
 
