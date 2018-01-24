@@ -47,8 +47,8 @@ router.post('/editpage', function(req, res) {
 	});
 });
 
-router.post('/editpage/save', function(req, res) {
-	pagesModel.update({_id:req.body.page._id}, { $set: { title: req.body.title,content: req.body.content, url:req.body.url}}, function (err,user){
+router.post('/editpage/save/:id', function(req, res) {
+	pagesModel.update({_id:req.params.id.trim()}, { $set: { title: req.body.title,content: req.body.content, url:req.body.url}}, function (err,pages){
 		if(err) return res.send(err);
 	});
 

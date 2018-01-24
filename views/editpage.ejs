@@ -1,6 +1,6 @@
 <% include headerAdmin.ejs %>
 
-<form method="post" action = "/admin/editpage/save">
+<form method="post" action = "/admin/editpage/save/<%=pages.id%>">
 	<p>titel: <%= pages.title%><p>
 	<input type="text" placeholder="title" id="title" name = "title"><br>
 	<p>content: <%= pages.content%><p>
