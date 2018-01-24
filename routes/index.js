@@ -20,6 +20,8 @@ router.post('/auth/register', function(req, res, next) {
 
 	newuser.save(function (err, user) {
 		if (err) return console.error(err);
+		req.session.user = user;
+
 	});
 
 	res.redirect("/admin");
@@ -53,7 +55,9 @@ router.get('/:page', function(req, res) {
 	pagesModel.findOne({url:req.params.page.trim()}, function(err,page){
 		if(err) return res.send(err);
 		if(page){
-		res.render('newpagetemplate', { title: page.title, content: page.content,useremail:page.useremail});
+			if(!page.visable)return res.send("Page is currently not on display")
+		
+			res.render('newpagetemplate', { title: page.title, content: page.content,useremail:page.useremail});
 		}
 		else{
 			res.send("404 error, Page not Found");
