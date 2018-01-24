@@ -16,6 +16,7 @@
 		<th>updated</th>
 		<th>options</th>
 	</tr>
+
 	<% for(var i=0; i<Object.keys(page).length; i++) {%>
 
 	<tr>
@@ -23,13 +24,21 @@
 		<td><%= page[i].date %></td>
 		<td>
 		<table id = tblmain>
-     		<td id = tblmain><a href = "/admin/delete"><img src="/images/delete.png" alt="delete" width="20" height="20"></a></td>
-     		<td id = tblmain><a href = "/admin/editpage"><img src="/images/edit.png" alt="edit" width="20" height="20"></td></a>
-     		<td id = tblmain><a href = "/admin/visability"><img src="/images/visibility.png" alt="visibility" width="20" height="20"></td></a>
-		</table>
+			<form method="post" action = "/admin/delete">
+	     		<td id = tblmain><input type = "image" src="/images/delete.png" alt="delete" width="20" height="20" name = "page" value = "<%=page[i]._id%>"></td>
+	     	</form>
+	     	<form method="post" action = "/admin/editpage">
+	     		<td id = tblmain><input type = "image" src="/images/edit.png" alt="editpage" width="20" height="20" name = "page" value = "<%=page[i]._id%>"></td>
+	     	</form>
+	     	<form method="post" action = "/admin/visability">
+	     		<td id = tblmain><input type = "image" <% if(page[i].visable){ %> src="/images/visability.png" <% }else{ %> src="/images/invisable.png" <% } %>alt="visability" width="20" height="20" background = #555 name = "page" value = "<%=page[i]._id%>"></td>
+	     	</form>
+			</table>
 		</td>
 	</tr>
+
 	<%}%>
+
 	</table>
 </div>
 

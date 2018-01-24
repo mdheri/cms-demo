@@ -7,7 +7,8 @@ var schema = mongoose.Schema({
     url: String,
     date: String,
     user: String,
-    useremail:String
+    useremail: String,
+    visable: Boolean
 });
 
 var model = mongoose.model('Page', schema);

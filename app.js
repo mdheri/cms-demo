@@ -49,7 +49,7 @@ app.use(function(req, res, next) {
   if (req.session && req.session.user) {
     User.findOne({ email: req.session.user.email }, function(err, user) {
       if (user) {
-        req.user = user;
+        req.user = user.toObject();
         delete req.user.password; 
         req.session.user = user;  
         res.locals.user = user;
@@ -60,6 +60,8 @@ app.use(function(req, res, next) {
     next();
   }
 });
+
+
 
 app.use('/users', users);
 app.use('/admin', admin);

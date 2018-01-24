@@ -1,9 +1,9 @@
 <% include headerAdmin.ejs %>
 
 <div class="edit">
-	<form method="post">
-		<input type="email" placeholder="enter your email" name="userid"><br>
-		<input type="password" placeholder="enter a password" name="pswrd"><br>
+	<form method="post" action = "/admin/editaccount/save">
+		<input type="email" placeholder="enter your email" name="email"><br>
+		<input type="password" placeholder="enter a password" name="password"><br>
 		<input type="submit" value="Save" name = btnsave>
 	</form>
 </div>
