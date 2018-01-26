@@ -3,8 +3,10 @@
 	
 	<div class="login">
 		<form method="post" action = "/auth/login">
-    		<input type="email" placeholder="enter your email" name="email"><br>
-    		<input type="password" placeholder="enter your password" name="password"><br>
+			<div class="autherror"><% if(incorrectpass){%> Incorrect Password<br> <% } %></div>
+			<div class="autherror"><% if(notfound){%> Email not found<br> <% } %> </div>
+    		<input type="email" placeholder="enter your email" name="email" required><br>
+    		<input type="password" placeholder="enter your password" name="password" required><br>
     		<input type="submit" value="Login" name = btnlogin>
 		</form>
 	</div>
@@ -12,8 +14,9 @@
 	
 	<div class="registration">
 		<form method="post" action = "/auth/register">
-    		<input type="email" placeholder="enter your email" name="email"><br>
-    		<input type="password" placeholder="enter a password" name="password"><br>
+			<div class="autherror"><% if(emailtaken){%>Email already taken<br>try again<br> <% } %></div> 
+    		<input type="email" placeholder="enter your email" name="email" required><br>
+    		<input type="password" placeholder="enter a password" name="password" required><br>
     		<input type="submit" value="Sign Up" name = btnsignup>
 		</form>
 	</div>

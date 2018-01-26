@@ -1,9 +1,10 @@
 <% include headerAdmin.ejs %>
 
 <form method="post" action = "/admin/addpage/save">
-	<input type="text" placeholder="title" id="title" name = "title"><br>
-	<textarea placeholder="content" id="content" name = "content"></textarea><br>
-	<input type="text" placeholder="please enter a url" id="url" name = "url"><br>
+	<input type="text" placeholder="title" id="title" name = "title" required><br>
+	<textarea placeholder="content" id="content" name = "content" required></textarea><br>
+	<div class="autherror"><% if(urltaken){%>URL already taken try again<br> <% } %></div> 
+	<input type="text" placeholder="please enter a url" id="url" name = "url" required><br>
     <input type="submit" value="Save" name = btnSave id = save>
 
 </form>

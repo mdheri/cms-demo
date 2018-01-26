@@ -5,7 +5,13 @@
 </div>
 
 <div class="body">
-	 <p>In this website you can create and edit pages</p>
+	<div class="scrollmenu">
+			<% for(var i=0; i<Object.keys(pages).length; i++) {%>
+				<a href="<%=pages[i].url%>"><%=pages[i].title%></a>
+			<% } %>
+
+
+	</div>
 </div>
 
 
