@@ -1,12 +1,10 @@
 <% include headerAdmin.ejs %>
 
 <form method="post" action = "/admin/editpage/save/<%=pages.id%>">
-	<p>titel: <%= pages.title%><p>
-	<input type="text" placeholder="title" id="title" name = "title"><br>
-	<p>content: <%= pages.content%><p>
-	<textarea placeholder="content" id="content" name = "content"></textarea><br>
-	<p>url: <%= pages.url%><p>
-	<input type="text" placeholder="please enter a url" id="url" name = "url"><br>
+	<input type="text" placeholder="title" value= <%= pages.title%> id="title" name = "title" required><br>
+	<textarea placeholder="content" value= <%= pages.content%> id="content"  name = "content" required></textarea><br>
+	<div class="autherror"><% if(urltaken){%>URL already taken try again<br> <% } %></div> 
+	<input type="text" placeholder="please enter a url" value= <%= pages.url%> id="url" name = "url" required><br>
     <input type="submit" value = "Save">
 
 </form>

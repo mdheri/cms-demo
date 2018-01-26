@@ -24,14 +24,13 @@
 		<td><%= page[i].date %></td>
 		<td>
 		<table id = tblmain>
-			<form method="post" action = "/admin/delete">
-	     		<td id = tblmain><input type = "image" src="/images/delete.png" alt="delete" width="20" height="20" name = "page" value = "<%=page[i]._id%>"></td>
-	     	</form>
-	     	<form method="post" action = "/admin/editpage">
-	     		<td id = tblmain><input type = "image" src="/images/edit.png" alt="editpage" width="20" height="20" name = "page" value = "<%=page[i]._id%>"></td>
-	     	</form>
-	     	<form method="post" action = "/admin/visability">
-	     		<td id = tblmain><input type = "image" <% if(page[i].visable){ %> src="/images/visability.png" <% }else{ %> src="/images/invisable.png" <% } %>alt="visability" width="20" height="20" background = #555 name = "page" value = "<%=page[i]._id%>"></td>
+			<form method="POST" action = "">
+				 <td id = tblmain><input type = "image" src="/images/delete.png" alt="delete" 
+					width="20" height="20" formaction="/admin/delete/<%=page[i]._id%>" ></td>
+				 <td id = tblmain><input type = "image" src="/images/edit.png" alt="editpage" 
+					width="20" height="20" formaction="/admin/editpage/<%=page[i]._id%>" formmethod="GET"></td>
+				 <td id = tblmain><input type = "image" <% if(page[i].visable){ %> src="/images/visability.png" <% }else{ %> src="/images/invisable.png" <% } %>alt="visability"
+					width="20" height="20" formaction="/admin/visability/<%=page[i]._id%>"></td>
 	     	</form>
 			</table>
 		</td>

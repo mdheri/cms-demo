@@ -2,13 +2,13 @@ var mongoose = require('mongoose');
 
 
 var schema = mongoose.Schema({
-    title: String,
-    content: String,
-    url: String,
-    date: String,
-    user: String,
-    useremail: String,
-    visable: Boolean
+    title: {type: String, required: true},
+    content: {type: String, required: true},
+    url: {type: String, required: true, unique:true},
+    date: {type: String, required: true},
+    user: {type: String, required: true},
+    useremail: {type: String, required: true},
+    visable: {type: Boolean, required: true}
 });
 
 var model = mongoose.model('Page', schema);
