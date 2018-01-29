@@ -5,12 +5,12 @@
 </div>
 	
 <div class="btnaddpage">
-	<a href="/admin/addpage"><input type="button" value="Add Page"></a>
+	<button class = "post btn-add">Add Page</button>
 </div>
 
 
 <div class = "table">
-	<table id = main>
+	<table id = main class = "table table-main">
 	<tr>
 		<th>title</th>
 		<th>updated</th>
@@ -22,23 +22,66 @@
 	<tr>
 		<td><a href = "<%= page[i].url%>" ><%= page[i].title %></a></td>
 		<td><%= page[i].date %></td>
-		<td>
-		<table id = tblmain>
-			<form method="POST" action = "">
-				 <td id = tblmain><input type = "image" src="/images/delete.png" alt="delete" 
-					width="20" height="20" formaction="/admin/delete/<%=page[i]._id%>" ></td>
-				 <td id = tblmain><input type = "image" src="/images/edit.png" alt="editpage" 
-					width="20" height="20" formaction="/admin/editpage/<%=page[i]._id%>" formmethod="GET"></td>
-				 <td id = tblmain><input type = "image" <% if(page[i].visable){ %> src="/images/visability.png" <% }else{ %> src="/images/invisable.png" <% } %>alt="visability"
-					width="20" height="20" formaction="/admin/visability/<%=page[i]._id%>"></td>
-	     	</form>
-			</table>
+		<td id = options>
+			<img src="/images/delete.png" alt="delete" class = "delete btn-delete" width="20" height="20" data-page-id = "<%=page[i]._id%>" >
+			<form>	
+				<input type = "image" src="/images/edit.png" alt="editpage" 
+				width="20" height="20" formaction="/admin/editpage/<%=page[i]._id%>" formmethod="GET">
+			</form>
+			<img <% if(page[i].visable){ %> src="/images/visability.png" <% }else{ %> src="/images/invisable.png" <% } %>alt="visiblity"class = "post btn-visable" width="20" height="20" data-page-id = "<%=page[i]._id%>">
 		</td>
 	</tr>
 
 	<%}%>
 
 	</table>
+<br><br>
 </div>
 
-<% include footer.ejs %>
+<div id="add-page">
+</div>
+
+<% include footerPages.ejs %>
+
+<script>
+	$(function(){
+		$('.btn-delete').on('click',function(event){
+			var button = $(this);
+			var pageId = $(this).attr("data-page-id");
+			$.ajax({
+				method: 'DELETE',
+				url: '/admin/page/'+ pageId
+			}).done(function(response){
+				button.parent().parent().remove();
+			});
+		});
+
+		$('.btn-visable').on('click',function(event){
+			var button = $(this);
+			var pageId = $(this).attr("data-page-id");
+			$.ajax({
+				method: 'POST',
+				url: '/admin/page/'+ pageId
+			}).done(function(response){
+				button.hide();
+				console.log(button.attr('src')
+)
+				if(button.attr('src') ==  "/images/visability.png")
+				{
+				button.attr('src', "/images/invisable.png")
+				}else{
+				button.attr('src', "/images/visability.png")
+				}
+				button.show(); 
+
+			});
+		});
+
+		$('.btn-add').on('click',function(event){
+			$('#add-page').load("/admin/addpage");
+		})
+	
+		
+		
+	});
+</script> 
