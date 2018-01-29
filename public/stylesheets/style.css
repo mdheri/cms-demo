@@ -23,15 +23,23 @@
   margin-top: 64px;
 }
 
-
+.bottom{
+  bottom: 0%;
+  padding:30px;
+}
 
 .footer{
-  position:fixed;
-  bottom: 2px;
+  background:black;
+  color: white;
+  position: fixed;
+  padding-left: 20px;
+  right : 0;
+  left :0;
+  bottom: 0;
 }
 
 .footer a{
-  color:black;
+  color:white;
   text-decoration:none;
 }
 
@@ -49,7 +57,7 @@ div.scrollmenu {
   position: fixed;
   width : 95%;
   top: 125px;
-  bottom:50px;
+  bottom:60px;
   left: 2.5%;
   overflow: auto;
   white-space: nowrap;
@@ -71,6 +79,11 @@ table#main, th,td{
   border: 1px solid black;
 }
 
+
+td#options{
+  text-align: center;
+  padding: 10px;
+}
 
 td#tblmain{
   text-align:center;

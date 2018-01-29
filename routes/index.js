@@ -1,13 +1,16 @@
 var express = require('express');
 var User = require('../models/user');
 var pagesModel = require('../models/page');
+var auth = require('../utils/auth');
 
 var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+	if(req.user) value = true;
+	else value = false;
 	pagesModel.find({visable:true}, function(err,allpages){
-  		res.render('home', { title: 'home',pages:allpages });
+  		res.render('home', { title: 'home',pages:allpages, admin: value});
 	});
 });
 
