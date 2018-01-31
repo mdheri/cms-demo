@@ -74,9 +74,9 @@ router.post('/editpage/save/:id', function(req, res) {
 });
 
 
-router.post('/addpage/:title/:content/:url', function(req, res) {
+router.post('/addpage/:title/:url', function(req, res) {
 	var current_date = new Date(); 
-	var newpage = new pagesModel({title: req.params.title.trim() , content:req.params.content.trim(),
+	var newpage = new pagesModel({title: req.params.title.trim() , content:req.body.content,
 		url:req.params.url.trim(), date:Date(), user:req.user._id, useremail:req.user.email, visable:true});
 	newpage.save(function (err, page) {
 		if (err) return res.render('addpage', {title: 'addpage', urltaken:true});
@@ -84,7 +84,6 @@ router.post('/addpage/:title/:content/:url', function(req, res) {
 	});
 	
 });
-
 
 
 

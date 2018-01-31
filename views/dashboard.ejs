@@ -36,15 +36,65 @@
 
 	</table>
 <br><br>
+
 </div>
 
-<div id="add-page">
+<div id = "modal">
+
+	<div id="add-page">
+		<div id = 'add-page-btn-title'>
+			<h3>Add a Page</h3>
+		</div>
+		<div id = 'add-page-btn-X'>
+				<button class = 'btn-cancel'>X</button>
+			</div>
+		<form>
+			title: <br>
+			<input type="text" placeholder="title" id="title" name = "title" required><br>
+			content: <br>
+			<div id = "toolbar"></div>
+			<div id = "editor"></div>
+			url: <br>
+			<input type="text" placeholder="please enter a url" id="url" name = "url" required><br><br>
+		</form>
+		
+		<button class = "btn-save">Save</button>
+		<button class = "btn-cancel">Cancel</button>
+
+
+			
+	</div>
+
+	<div id="modal-background">	
+	</div>
+
 </div>
 
 <% include footerPages.ejs %>
 
 <script>
+
+	var toolbarOptions = [
+		['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+		['blockquote', 'code-block'],
+		[{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+		[{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+		[{ 'align': [] }],
+		['clean']                                         // remove formatting button
+	];
+
+	var quill = new Quill('#editor', {
+		modules: {
+			toolbar: toolbarOptions
+		},
+		theme: 'snow'
+	});
+
 	$(function(){
+		var modalcontainer = $('modal');
+		$('.table-main').on('click','btn-delete',function(event){
+			console.log($(this));
+		});
 		$('.btn-delete').on('click',function(event){
 			var button = $(this);
 			var pageId = $(this).attr("data-page-id");
@@ -64,8 +114,7 @@
 				url: '/admin/page/'+ pageId
 			}).done(function(response){
 				button.hide();
-				console.log(button.attr('src')
-)
+				console.log(button.attr('src'))
 				if(button.attr('src') ==  "/images/visability.png")
 				{
 				button.attr('src', "/images/invisable.png")
@@ -77,8 +126,33 @@
 			});
 		});
 
+		$('.btn-save').on('click',function(event){
+			var thistitle = document.getElementById('title').value;
+			var	thiscontent = document.querySelector(".ql-editor").innerHTML;
+			var url = document.getElementById('url').value;
+			$.ajax({
+				method: 'POST',
+				url: '/admin/addpage/'+ thistitle  + '/' + url,
+				data: {content: thiscontent}
+			}).done(function(response){
+				$('#modal').hide();
+				$('.table-main').append("<tr><td><a href ='" + url + "'> "+ thistitle + " </a></td><td> "+ Date() + 
+					"</td><td id = options> <img src='/images/delete.png' alt='delete' class = 'delete btn-delete' width='20' height='20' >" +
+					"<form>	<input type = 'image' src='/images/edit.png' alt='editpage' width='20' height='20' ></form>" + 
+					"<img src='/images/visability.png' width='20' height='20'></td></tr>");
+			});
+		})
+
+		$('#modal').on('click','#modal-background',function(event){
+			$('#modal').hide();
+		});
+
+		$('.btn-cancel').on('click',function(event){
+			$('#modal').hide();
+		});
+
 		$('.btn-add').on('click',function(event){
-			$('#add-page').load("/admin/addpage");
+			$('#modal').show();
 		})
 	
 		
