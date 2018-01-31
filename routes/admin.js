@@ -74,13 +74,13 @@ router.post('/editpage/save/:id', function(req, res) {
 });
 
 
-router.post('/addpage/:title/:url', function(req, res) {
+router.post('/addpage/:url', function(req, res) {
 	var current_date = new Date(); 
-	var newpage = new pagesModel({title: req.params.title.trim() , content:req.body.content,
+	var newpage = new pagesModel({title: req.body.title , content:req.body.content,
 		url:req.params.url.trim(), date:Date(), user:req.user._id, useremail:req.user.email, visable:true});
 	newpage.save(function (err, page) {
 		if (err) return res.render('addpage', {title: 'addpage', urltaken:true});
-		res.redirect('/admin');
+		res.send(page);
 	});
 	
 });

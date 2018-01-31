@@ -10,7 +10,7 @@
 
 
 <div class = "table">
-	<table id = main class = "table table-main">
+	<table id = main class = "table-main">
 	<tr>
 		<th>title</th>
 		<th>updated</th>
@@ -92,10 +92,7 @@
 
 	$(function(){
 		var modalcontainer = $('modal');
-		$('.table-main').on('click','btn-delete',function(event){
-			console.log($(this));
-		});
-		$('.btn-delete').on('click',function(event){
+		$('.table-main').on('click','.btn-delete',function(event){
 			var button = $(this);
 			var pageId = $(this).attr("data-page-id");
 			$.ajax({
@@ -106,7 +103,7 @@
 			});
 		});
 
-		$('.btn-visable').on('click',function(event){
+		$('.table-main').on('click','.btn-visable',function(event){
 			var button = $(this);
 			var pageId = $(this).attr("data-page-id");
 			$.ajax({
@@ -114,7 +111,6 @@
 				url: '/admin/page/'+ pageId
 			}).done(function(response){
 				button.hide();
-				console.log(button.attr('src'))
 				if(button.attr('src') ==  "/images/visability.png")
 				{
 				button.attr('src', "/images/invisable.png")
@@ -126,21 +122,23 @@
 			});
 		});
 
+
 		$('.btn-save').on('click',function(event){
 			var thistitle = document.getElementById('title').value;
 			var	thiscontent = document.querySelector(".ql-editor").innerHTML;
 			var url = document.getElementById('url').value;
 			$.ajax({
 				method: 'POST',
-				url: '/admin/addpage/'+ thistitle  + '/' + url,
-				data: {content: thiscontent}
+				url: '/admin/addpage/' + url,
+				data: {content: thiscontent, title: thistitle}
 			}).done(function(response){
 				$('#modal').hide();
-				$('.table-main').append("<tr><td><a href ='" + url + "'> "+ thistitle + " </a></td><td> "+ Date() + 
-					"</td><td id = options> <img src='/images/delete.png' alt='delete' class = 'delete btn-delete' width='20' height='20' >" +
-					"<form>	<input type = 'image' src='/images/edit.png' alt='editpage' width='20' height='20' ></form>" + 
-					"<img src='/images/visability.png' width='20' height='20'></td></tr>");
-			});
+				$('.table-main').append("<tr><td><a href ='" + url + "'> "+ thistitle + " </a></td><td> "+ Date() + "</td> "+ "<td id = options> " + 
+					"<img src='/images/delete.png' alt='delete' class = 'delete btn-delete' width='20' height='20' data-page-id = '" + response._id + "'> \n " +
+					"<form>	<input type = 'image' src='/images/edit.png' alt='editpage' width='20' height='20' class = 'btn-edit' formaction='/admin/editpage/" + response._id + "' formmethod='GET'></form>" + 
+					"<img <% if(" + response.visable + "){ %> src='/images/visability.png' <% }else{ %> src='/images/invisable.png' <% } %>alt='visiblity' class = 'post btn-visable' width='20' height='20' data-page-id = '" + response._id + "'>" + 
+					"</td> </tr>");
+				});
 		})
 
 		$('#modal').on('click','#modal-background',function(event){
