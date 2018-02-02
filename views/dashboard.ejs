@@ -48,17 +48,13 @@
 			title: <br>
 			<input type="text" placeholder="title" id="title" name = "title" required><br>
 			content: <br>
-			<div id = "toolbar"></div>
-			<div id = "editor"></div>
+			<textarea id = "pagecontent"></textarea>
 			url: <br>
 			<input type="text" placeholder="please enter a url" id="url" name = "url" required><br><br>
 		</form>
 		
 		<button class = "btn-save">Save</button>
 		<button class = "btn-cancel">Cancel</button>
-
-
-			
 	</div>
 
 	<div id="modal-background">	
@@ -69,23 +65,6 @@
 <% include footerPages.ejs %>
 
 <script>
-
-	var toolbarOptions = [
-		['bold', 'italic', 'underline', 'strike'],        // toggled buttons
-		['blockquote', 'code-block'],
-		[{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-		[{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
-		[{ 'align': [] }],
-		['clean']                                         // remove formatting button
-	];
-
-	var quill = new Quill('#editor', {
-		modules: {
-			toolbar: toolbarOptions
-		},
-		theme: 'snow'
-	});
-
 	$(function(){
 		var modalcontainer = $('modal');
 		$('.table-main').on('click','.btn-delete',function(event){
@@ -121,8 +100,9 @@
 
 		$('.btn-save').on('click',function(event){
 			var thistitle = document.getElementById('title').value;
-			var	thiscontent = document.querySelector(".ql-editor").innerHTML;
+			var thiscontent = tinymce.get("pagecontent").getContent();
 			var url = document.getElementById('url').value;
+			console.log(thiscontent);
 			$.ajax({
 				method: 'POST',
 				url: '/admin/addpage/' + url,
