@@ -55,11 +55,13 @@ router.get('/logout', function(req, res) {
 });
 
 router.get('/:page', function(req, res) {
+	if(req.user) value = true;
+	else value = false;
 	pagesModel.findOne({url:req.params.page.trim()}, function(err,page){
 		if(err) return res.send(err);
 		if(page){
 			if(!page.visable)return res.send("Page is currently not on display")
-			res.render('newpagetemplate', { title: page.title, content: page.content,useremail:page.useremail});
+			res.render('newpagetemplate', { title: page.title, content: page.content,useremail:page.useremail, id:page._id, admin: value});
 		}
 		else{
 			res.send("404 error, Page not Found");

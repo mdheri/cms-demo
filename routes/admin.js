@@ -67,7 +67,7 @@ router.get('/editpage/:id', function(req, res) {
 });
 
 router.post('/editpage/save/:id', function(req, res) {
-	pagesModel.update({_id:req.params.id.trim(),user:req.user._id},{$set: { title: req.body.title, content:req.body.content, url:req.body.url, date:Date()}}, function (err,page){
+	pagesModel.update({_id:req.params.id.trim(),user:req.user._id},{$set: {content:req.body.content, date:Date()}}, function (err,page){
 		if(err) return res.render('editpage', {title: 'editpage', pages: page, urltaken:false});
 		return res.redirect('/admin');
 	});
