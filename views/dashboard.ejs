@@ -24,10 +24,6 @@
 		<td><%= page[i].date %></td>
 		<td id = options>
 			<img src="/images/delete.png" alt="delete" class = "delete btn-delete" width="20" height="20" data-page-id = "<%=page[i]._id%>" >
-			<form>	
-				<input type = "image" src="/images/edit.png" alt="editpage" 
-				width="20" height="20" formaction="/admin/editpage/<%=page[i]._id%>" formmethod="GET">
-			</form>
 			<img <% if(page[i].visable){ %> src="/images/visability.png" <% }else{ %> src="/images/invisable.png" <% } %>alt="visiblity"class = "post btn-visable" width="20" height="20" data-page-id = "<%=page[i]._id%>">
 		</td>
 	</tr>
@@ -135,7 +131,6 @@
 				$('#modal').hide();
 				$('.table-main').append("<tr><td><a href ='" + url + "'> "+ thistitle + " </a></td><td> "+ Date() + "</td> "+ "<td id = options> " + 
 					"<img src='/images/delete.png' alt='delete' class = 'delete btn-delete' width='20' height='20' data-page-id = '" + response._id + "'> \n " +
-					"<form>	<input type = 'image' src='/images/edit.png' alt='editpage' width='20' height='20' class = 'btn-edit' formaction='/admin/editpage/" + response._id + "' formmethod='GET'></form>" + 
 					"<img <% if(" + response.visable + "){ %> src='/images/visability.png' <% }else{ %> src='/images/invisable.png' <% } %>alt='visiblity' class = 'post btn-visable' width='20' height='20' data-page-id = '" + response._id + "'>" + 
 					"</td> </tr>");
 				});

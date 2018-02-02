@@ -1,17 +1,39 @@
+<% if(admin){%>
 <% include headerAdmin.ejs %>
+<% } else { %>	
+<% include header.ejs %>
+<% } %>
+		<div class = "header">
+					<h1><%= title %><h1>
+		</div>
 
-<div class = "header">
-	    <h1><%= title %><h1>
-</div>
+		<p id = 'pageid' hidden><%=id%></p>
 
-<div class="body">
-	 <%- content %>
-</div>
+		<%if(admin){%>
+		<div data-editable data-name="content">
+					<%- content %>
+		</div>
+	
+		<script src = "/assets/content-tools.js"></script>
+		<script src = "/assets/editor.js"></script>
+		<%}else{%>
+					<%- content %>
+		<%}%>
 
-
-<div class="footer">
-	<p>Created By <a href="mailto:<%=useremail%>"><%=useremail%> </a>.</p>
-</div>
+		<div class = bottom>
+		</div>
+		
+		<div class="footer">
+				<p>Created by <a href="mailto:<%= useremail %>"><%= useremail %></a>.</p>
+		</div>
 	
   </body>
 </html>
+
+<script>
+		$(function(){
+
+			var pageid = document.getElementById("pageid").textContent;
+
+		});
+</script>
